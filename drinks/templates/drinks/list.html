@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %} <title>Drinks</title> {% endblock title %}
+
+{% block pagination %}
+    <div class="pagination1">
+        <div>
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+
+            {% for page_number in page_obj.paginator.page_range %}
+                <a href="?page={{page_number}}"class="{% if page_number == page_obj.number %}active{% endif %}">
+                {{page_number}}
+            </a>
+            {% endfor %}
+            <a> &raquo; </a>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <a> &laquo; </a>
+
+            {% for page_number in page_obj.paginator.page_range %}
+                <a href="?page={{page_number}}"class="{% if page_number == page_obj.number %}active{% endif %}">
+                {{page_number}}
+            </a>
+            {% endfor %}
+            <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock pagination %}
+
+{% block content %}
+        <h1 class="page-title">Drink Up</h1>
+        <div class="recipe-grid">
+            {% for drink in drink_list %}
+                <div class="{% cycle 'grid-item1' 'grid-item2' %}">
+                    <div> <img class="grid-image" src="{{ drink.image }}"> </div>
+                    <div class="drink-name">{{drink.name}}</div>
+                    <table style="width:100%" class="header">
+                        <tr>
+                            <th class="ingredients">Ingredients</th>
+                            <th class="difficulty">Difficulty
+                                {% if drink.difficulty == "1" %}
+                                <img src="https://chopinvodka.com/wp-content/uploads/2019/07/difficulty_easy.png">
+                                {% elif drink.difficulty == "2" %}
+                                <img src="https://chopinvodka.com/wp-content/uploads/2019/07/difficulty_medium.png">
+                                {% elif drink.difficulty == "3" %}
+                                <img src="https://chopinvodka.com/wp-content/uploads/2019/07/difficulty_hard.png">
+                                {% endif %}
+                            </th>
+                        </tr>
+                    </table>
+                    <table>
+                        {% for ingredient in drink.drinks.all %}
+                            <tr>
+                                <td class="drink-ingredients">{{ingredient.amount}} {{ingredient.name}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endfor %}
+        </div>
+{% endblock content %}
+
+
+{% comment %}  {% endcomment %}

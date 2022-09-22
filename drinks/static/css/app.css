@@ -1,0 +1,155 @@
+body {
+    display: grid;
+    grid-template-columns: 1fr 15fr 15fr 1fr;
+    grid-template-areas:
+        "header header header header"
+        " main main main main"
+        "footer footer footer footer";
+}
+
+header {
+    grid-area: header;
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3em;
+    padding: 1em;
+}
+
+.grid-item1 {
+    display: block;
+    margin-right: 40px;
+    margin-left: auto;
+    width: 455px;
+    height: 600px;
+}
+
+.grid-item2 {
+    display: block;
+    margin-left: 40px;
+    margin-right: auto;
+    width: 455px;
+    height: 600px;
+}
+
+.grid-image {
+    display: block;
+    height: 315px;
+    width: 455px;
+}
+
+
+.recipe-description {
+    font-size: 10px;
+}
+
+.header {
+    padding-top: 25px;
+    padding-bottom: 10px;
+}
+
+.ingredients {
+    text-align: left;
+    font-weight: 900;
+}
+
+.difficulty {
+    text-align: right;
+    font-weight: 900;
+}
+
+.drink-name {
+    font-size: 35px;
+}
+
+
+.drink-ingredients {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.pagination1 {
+    text-align: center;
+    padding: 2em;
+}
+
+.pagination1 a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination1 a.active {
+    background-color: #4894b285;
+    color: white;
+}
+
+.pagination1 a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.page-title {
+    text-align: center;
+}
+
+/* .recipe-grid {
+    display: inline-grid;
+    border: 2px solid black;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 2em;
+    padding: 1em;
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid black;
+    padding: 1px;
+    font-size: 30px;
+    justify-content: center;
+    text-align: center;
+}
+
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 80%;
+    height: 60%;
+}
+
+
+
+.pagination1 a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}

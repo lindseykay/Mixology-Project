@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>
+{% for drink in drink_list %}
+    <ul>
+        <li>{{drink.name}}</li>
+        <li>{% if drink.difficulty == "1" %}
+        show1
+        {% endif %}
+        </li>
+    </ul>
+{% endfor %}
+</h1>
+
+{% endblock content %}
