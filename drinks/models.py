@@ -9,13 +9,17 @@ USER_MODEL = settings.AUTH_USER_MODEL
 class Drink(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False)
     image = models.URLField(blank=False)
-    instructions = models.TextField(blank=False)
+    instructions = models.TextField(null=True, blank=True)
     creator = models.ForeignKey(
         USER_MODEL, related_name="drinks", on_delete=models.CASCADE, null=True
     )
     created = models.DateTimeField(auto_now_add=True)
-    glass = models.ForeignKey("Glass", related_name="drink", on_delete=models.PROTECT, null=True)
-    garnish = models.ForeignKey("Garnish", related_name="drink", on_delete=models.PROTECT, null=True, blank=True)
+    glass = models.ForeignKey(
+        "Glass", related_name="drink", on_delete=models.PROTECT, null=True, blank=True
+    )
+    garnish = models.ForeignKey(
+        "Garnish", related_name="drink", on_delete=models.PROTECT, null=True, blank=True
+    )
 
     EASY = "1"
     MODERATE = "2"
@@ -68,6 +72,7 @@ class Ingredient(models.Model):
 class Glass(models.Model):
     class Meta:
         verbose_name_plural = "glasses"
+
     type = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
@@ -77,6 +82,7 @@ class Glass(models.Model):
 class Garnish(models.Model):
     class Meta:
         verbose_name_plural = "garnish"
+
     name = models.CharField(max_length=200)
 
     def __str__(self):
