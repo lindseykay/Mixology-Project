@@ -3,8 +3,13 @@ from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from extra_views import (
+    CreateWithInlinesView,
+    UpdateWithInlinesView,
+    InlineFormSetFactory,
+)
 
-from .models import Drink, Ingredient
+from .models import Drink, Ingredient, Garnish
 
 # Create your views here.
 
@@ -15,28 +20,39 @@ class DrinkListView(ListView):
     paginate_by = 4
 
 
-class DrinkCreateView(LoginRequiredMixin, CreateView):
+# class DrinkCreateView(LoginRequiredMixin, CreateView):
+#     model = Drink
+#     template_name = "drinks/new.html"
+#     fields = [
+#         "name",
+#         "image",
+#         "difficulty",
+#         "liquor_type",
+#         "glass",
+#     ]
+
+#     def form_valid(self, form):
+#         new_receipe = form.save(commit=False)
+#         new_receipe.creator = self.request.user
+#         new_receipe.save()
+#         return redirect("create_ingredient", pk=new_receipe.id)
+
+
+class IngredientInline(InlineFormSetFactory):
+    model = Ingredient
+    fields = ["amount", "name"]
+
+
+class GarnishInline(InlineFormSetFactory):
+    model = Garnish
+    fields = ["name"]
+
+
+class DrinkCreateView(LoginRequiredMixin, CreateWithInlinesView):
     model = Drink
-    template_name = "drinks/new.html"
-    fields = [
-        "name",
-        "image",
-        "difficulty",
-        "liquor_type",
-        "glass",
-    ]
-
-    def form_valid(self, form):
-        new_receipe = form.save(commit=False)
-        new_receipe.creator = self.request.user
-        new_receipe.save()
-        return redirect("create_ingredient", pk=new_receipe.id)
-
-
-class DrinkCreateUpdateView(LoginRequiredMixin, UpdateView):
-    model = Drink
+    inlines = [IngredientInline, GarnishInline]
+    fields = ["name", "image", "instructions", "glass", "difficulty", "liquor_type"]
     template_name = "drinks/ingredients.html"
-    fields = ["name", "instructions"]
 
     def get_object(self, queryset=None):
         try:

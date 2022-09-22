@@ -17,9 +17,6 @@ class Drink(models.Model):
     glass = models.ForeignKey(
         "Glass", related_name="drink", on_delete=models.PROTECT, null=True, blank=True
     )
-    garnish = models.ForeignKey(
-        "Garnish", related_name="drink", on_delete=models.PROTECT, null=True, blank=True
-    )
 
     EASY = "1"
     MODERATE = "2"
@@ -84,6 +81,9 @@ class Garnish(models.Model):
         verbose_name_plural = "garnish"
 
     name = models.CharField(max_length=200)
+    drink = models.ForeignKey(
+        "Drink", related_name="garnish", on_delete=models.PROTECT, null=True, blank=True
+    )
 
     def __str__(self):
         return self.name

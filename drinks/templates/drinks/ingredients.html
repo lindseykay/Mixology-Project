@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% csrf_token %}
-{{form.as_p}}
-<button>Submit</button>
+<form method="post">
+
+    {{ form.as_p }}
+
+    {% for formset in inlines %}
+      {{ formset }}
+    {% endfor %}
+    ...
+    <input type="submit" value="Submit" />
+  </form>
 
 {% endblock content %}

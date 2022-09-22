@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "extra_views",
     "accounts.apps.AccountsConfig",
     "drinks.apps.DrinksConfig",
     "django.contrib.admin",
